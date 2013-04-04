@@ -3,6 +3,7 @@ package com.Tattoo.db;
 import com.Tattoo.db.TattooDB.DBImplementation;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -13,6 +14,10 @@ public class SQLiteTattooDB implements DBImplementation {
     private static final String CREATE_TABLE = "create table if not exists [%s] (rowId text, blob text, indexValue text);";
     private SQLiteDatabase db;
 	
+    public SQLiteTattooDB(Context context) {
+    	db = TattooDBOpenHelper.getHelper(context).getWritableDatabase();
+    }
+    
 	public SQLiteTattooDB(SQLiteDatabase value) {
 		db = value;
 	}
@@ -112,4 +117,8 @@ public class SQLiteTattooDB implements DBImplementation {
 	private String prepareStoreName(String value) {
 		return String.format("[%s]", value);
 	}
+	
+
+	
+
 }
